@@ -20,3 +20,9 @@ KImageButton(image: .init(systemName: "circle")) {
 }
 ```
 
+## KBarcodeView 
+바코드 뷰 
+
+```Swift 
+KBarcodeView(text:"test1234")
+```
