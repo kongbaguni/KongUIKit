@@ -11,6 +11,11 @@ public struct KImageButton: View {
     let image: Image
     let onClick: () -> Void
     
+    public init(image: Image, onClick: @escaping () -> Void) {
+        self.image = image
+        self.onClick = onClick
+    }
+    
     public var body: some View {
         Button {
             onClick()
