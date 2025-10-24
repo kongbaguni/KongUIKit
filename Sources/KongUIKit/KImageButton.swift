@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct KImageButton: View {
     
-    public struct Style {
+    public struct Style : Sendable {
         let foregroundColor: Color
         let backgroundColor: Color
         let padding:CGFloat
@@ -20,6 +20,8 @@ public struct KImageButton: View {
             self.padding = padding
             self.cornerRadius = cornerRadius
         }
+        
+        public static let simple: Style = .init(foregroundColor: .primary, backgroundColor: .clear, padding: 5, cornerRadius: 10)
     }
     
     let image: Image
@@ -67,7 +69,8 @@ public struct KImageButton: View {
         ) {
             print("test test")
         }
-        KImageButton(image: .init(systemName: "circle")
+        KImageButton(image: .init(systemName: "circle"),
+                     style: .simple
         ) {
             print("test test")
         }
