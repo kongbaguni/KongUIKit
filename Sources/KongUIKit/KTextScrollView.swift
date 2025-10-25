@@ -11,10 +11,18 @@ public struct KTextScrollView : View {
         let backgroundColor: Color
         let foregroundColor: Color
         let cornerRadius: CGFloat
+        public init (backgroundColor: Color,
+                     foregroundColor: Color,
+                     cornerRadius: CGFloat) {
+            self.backgroundColor = backgroundColor
+            self.foregroundColor = foregroundColor
+            self.cornerRadius = cornerRadius
+        }
         
-        public static let `default`: Style = .init(backgroundColor: .clear,
-                                            foregroundColor: .primary,
-                                            cornerRadius: 8)
+        public static let `default`: Style =
+            .init(backgroundColor: .clear,
+                  foregroundColor: .primary,
+                  cornerRadius: 8)
     }
     
     public init(string: String, style: Style = .default) {
@@ -46,6 +54,10 @@ public struct KTextScrollView : View {
 }
 
 #Preview {
-    KTextScrollView(string: "Hello World", style: .default)
-        .padding(50)
+    KTextScrollView(string: "Hello World",
+                    style: .init(backgroundColor: .yellow,
+                                 foregroundColor: .blue,
+                                 cornerRadius: 3)
+    )
+    .padding(50)
 }

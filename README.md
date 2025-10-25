@@ -31,6 +31,10 @@ KBarcodeView(text:"test1234")
 스크롤뷰 사용하는 텍스트뷰 
 
 ```Swift 
-KTextScrollView(string: "Hello World", style: .default)
-    .padding(50)
+KTextScrollView(string: "Hello World",
+                style: .init(backgroundColor: .yellow,
+                             foregroundColor: .blue,
+                             cornerRadius: 3)
+)
+.padding(50)
 ```
