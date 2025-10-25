@@ -26,3 +26,11 @@ KImageButton(image: .init(systemName: "circle")) {
 ```Swift 
 KBarcodeView(text:"test1234")
 ```
+
+## KTextScrollView 
+스크롤뷰 사용하는 텍스트뷰 
+
+```Swift 
+KTextScrollView(string: "Hello World", style: .default)
+    .padding(50)
+```
