@@ -9,8 +9,16 @@ import SwiftUI
 import CoreImage
 import CoreImage.CIFilterBuiltins
 
+#if canImport(UIKit)
+import UIKit
+public typealias PlatformImage = UIImage
+#elseif canImport(AppKit)
+import AppKit
+public typealias PlatformImage = NSImage
+#endif
+
 fileprivate extension String {
-    var barcodeImage:UIImage? {
+    var barcodeImage: PlatformImage? {
         let context = CIContext()
         let filter = CIFilter.code128BarcodeGenerator()
         
@@ -23,7 +31,11 @@ fileprivate extension String {
         let scaledImage = outputImage.transformed(by: CGAffineTransform(scaleX: 3, y: 3))
         
         if let cgImage = context.createCGImage(scaledImage, from: scaledImage.extent) {
-            return UIImage(cgImage: cgImage)
+            #if canImport(UIKit)
+            return PlatformImage(cgImage: cgImage)
+            #elseif canImport(AppKit)
+            return PlatformImage(cgImage: cgImage, size: NSSize(width: scaledImage.extent.width, height: scaledImage.extent.height))
+            #endif
         }
         return nil
     }
@@ -41,9 +53,18 @@ public struct KBarcodeView: View {
     public var body: some View {
         VStack {
             if let image = text.barcodeImage {
-                Image(uiImage: image)
+                let platformImageView: Image = {
+                    #if canImport(UIKit)
+                    return Image(uiImage: image)
+                    #elseif canImport(AppKit)
+                    return Image(nsImage: image)
+                    #else
+                    return Image(systemName: "xmark.circle")
+                    #endif
+                }()
+                platformImageView
                     .resizable()
-                    .interpolation(.none) // 픽셀 보존
+                    .interpolation(Image.Interpolation.none) // 픽셀 보존
                     .scaledToFit()
                     .cornerRadius(cornerRadius)
             } else {
