@@ -12,8 +12,8 @@ public struct KSelectView: View {
             self.id = id
             self.color = color
         }
-        let id: Int
-        let color: Color
+        public let id: Int
+        public let color: Color
     }
     
     let items: [Item]
