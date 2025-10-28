@@ -16,6 +16,11 @@ public struct KSelectView: View {
         public let color: Color
     }
     
+    public init(items: [Item], selected: Binding<Item?> = .constant(nil)) {
+        self.items = items
+        self._selected = selected
+    }
+    
     let items: [Item]
     @Binding var selected: Item?
     
@@ -45,18 +50,18 @@ public struct KSelectView: View {
 #Preview {
     VStack {
         KSelectView(items: [
-            .init(id:1, color: .red),
-            .init(id:2, color: .orange),
-            .init(id:3, color: .yellow),
-            .init(id:4, color: .green),
-            .init(id:5, color: .blue),
-            .init(id:6, color: .purple)
-        ], selected: .constant(.init(id:1, color: .red)))
+            KSelectView.Item(id: 1, color: Color.red),
+            KSelectView.Item(id: 2, color: Color.orange),
+            KSelectView.Item(id: 3, color: Color.yellow),
+            KSelectView.Item(id: 4, color: Color.green),
+            KSelectView.Item(id: 5, color: Color.blue),
+            KSelectView.Item(id: 6, color: Color.purple)
+        ], selected: .constant(KSelectView.Item(id: 1, color: Color.red)))
         
         KSelectView(items: [
-            .init(id:1, color: .orange),
-            .init(id:2, color: .red)
-        ], selected: .constant(.init(id:2, color: .red)))
+            KSelectView.Item(id: 1, color: Color.orange),
+            KSelectView.Item(id: 2, color: Color.red)
+        ], selected: .constant(KSelectView.Item(id: 2, color: Color.red)))
 
     }
 }
