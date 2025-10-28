@@ -8,11 +8,11 @@ import SwiftUI
 
 public struct KSelectView: View {
     public struct Item : Hashable {
-        public init(id: String, color: Color) {
+        public init(id: Int, color: Color) {
             self.id = id
             self.color = color
         }
-        let id: String
+        let id: Int
         let color: Color
     }
     
@@ -45,18 +45,18 @@ public struct KSelectView: View {
 #Preview {
     VStack {
         KSelectView(items: [
-            .init(id:"1", color: .red),
-            .init(id:"2", color: .orange),
-            .init(id:"3", color: .yellow),
-            .init(id:"4", color: .green),
-            .init(id:"5", color: .blue),
-            .init(id:"6", color: .purple)
-        ], selected: .constant(.init(id:"1", color: .red)))
+            .init(id:1, color: .red),
+            .init(id:2, color: .orange),
+            .init(id:3, color: .yellow),
+            .init(id:4, color: .green),
+            .init(id:5, color: .blue),
+            .init(id:6, color: .purple)
+        ], selected: .constant(.init(id:1, color: .red)))
         
         KSelectView(items: [
-            .init(id:"1", color: .orange),
-            .init(id:"2", color: .red)
-        ], selected: .constant(.init(id:"2", color: .red)))
+            .init(id:1, color: .orange),
+            .init(id:2, color: .red)
+        ], selected: .constant(.init(id:2, color: .red)))
 
     }
 }
