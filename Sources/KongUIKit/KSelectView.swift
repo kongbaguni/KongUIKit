@@ -43,7 +43,7 @@ public struct KSelectView: View {
                     .frame(width: 50, height: 50)
                 }
             }
-        }.padding()
+        }
     }
 }
 
