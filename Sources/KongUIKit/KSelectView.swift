@@ -42,7 +42,7 @@ public struct KSelectView: View {
                     } label: {
                         if #available(iOS 26.0, *) {
                             retangle(item)
-                                .glassEffect(.clear.interactive(), in: .rect(cornerRadius: 10)
+                                .glassEffect(.clear.interactive(), in: .rect(cornerRadius: 25)
                                 )
                         } else {
                             retangle(item)
