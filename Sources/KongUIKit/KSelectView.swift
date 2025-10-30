@@ -23,6 +23,16 @@ public struct KSelectView: View {
     
     let items: [Item]
     @Binding var selected: Item?
+    
+    func retangle(_ item:Item) -> some View {
+        RoundedRectangle(cornerRadius: 25)
+            .fill(item.color)
+            .background {
+                RoundedRectangle(cornerRadius: 25)
+                    .stroke(selected == item ? .primary : Color.clear, lineWidth: 7)
+            }
+    }
+    
     var scrollView : some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
@@ -30,13 +40,13 @@ public struct KSelectView: View {
                     Button {
                         selected = item
                     } label: {
-                        RoundedRectangle(cornerRadius: 25)
-                            .fill(item.color)
-                            .background {
-                                RoundedRectangle(cornerRadius: 25)
-                                    .stroke(selected == item ? .primary : Color.clear, lineWidth: 7)
-                            }
-                            
+                        if #available(iOS 26.0, *) {
+                            retangle(item)
+                                .glassEffect(.clear.interactive(), in: .rect(cornerRadius: 10)
+                                )
+                        } else {
+                            retangle(item)
+                        }
                     }
                     .padding(5)
                     .frame(width: 50, height: 50)
@@ -46,7 +56,7 @@ public struct KSelectView: View {
     }
     public var body: some View {
         if #available(iOS 26.0, *) {
-            scrollView.glassEffect(.clear.interactive(), in: .rect(cornerRadius: 25))
+            scrollView.glassEffect(.clear.interactive(), in: .rect(cornerRadius: 10))
         } else {
             scrollView
         }
