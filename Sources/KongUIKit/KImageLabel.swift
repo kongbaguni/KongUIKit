@@ -29,7 +29,7 @@ public struct KImageLabel: View {
             self.isHorizontal = isHorizontal
         }
         
-        public static let simple: Style = .init(foregroundColor: .primary, backgroundColor: .clear, padding: 5, cornerRadius: 10)
+        public static let simple: Style = .init(foregroundColor: .primary, backgroundColor: .clear, padding: 5, cornerRadius: 10, isHorizontal: false)
         
         public static let horizontalButton : Style = .init(
             foregroundColor: .primary,
@@ -99,6 +99,7 @@ public struct KImageLabel: View {
                                       isHorizontal: false)
             )
             KImageLabel(image: .init(systemName: "circle"),
+                        title: .init("test test"),
                          style: .simple
             )
         }.padding(5)
