@@ -2,6 +2,22 @@
 
 유용한 UI 컴포넌트킷
 
+## KImageLabel 
+이미지를 사용하는 라벨 
+```Swift
+KImageLabel(image: .init(systemName: "circle"),
+             title: .init("test test"),
+             style: .init(foregroundColor: .yellow,
+                          backgroundColor: .black,
+                          padding: 10,
+                          cornerRadius: 30,
+                          isHorizontal: false)
+)
+KImageLabel(image: .init(systemName: "circle"),
+             style: .simple
+)
+```
+
 ## KImageButton 
 이미지 버튼 
 
