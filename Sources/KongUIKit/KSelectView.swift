@@ -23,8 +23,7 @@ public struct KSelectView: View {
     
     let items: [Item]
     @Binding var selected: Item?
-    
-    public var body: some View {
+    var scrollView : some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(items, id: \.self) { item in
@@ -43,6 +42,13 @@ public struct KSelectView: View {
                     .frame(width: 50, height: 50)
                 }
             }
+        }
+    }
+    public var body: some View {
+        if #available(iOS 26.0, *) {
+            scrollView.glassEffect(.clear.interactive(), in: .rect(cornerRadius: 25))
+        } else {
+            scrollView
         }
     }
 }

@@ -52,8 +52,7 @@ public struct KImageLabel: View {
         self.style = style
     }
     
-    public var body: some View {
-        
+    var label: some View {
         Group {
             if style.isHorizontal {
                 HStack {
@@ -84,6 +83,14 @@ public struct KImageLabel: View {
                 .fill(style.backgroundColor)
         }
     }
+    public var body: some View {
+        if #available(iOS 26.0, *) {
+            label.glassEffect(.clear.interactive(),
+                              in: .rect(cornerRadius: style.cornerRadius))
+        } else {
+            label
+        }
+    }
     
 }
 
@@ -109,6 +116,7 @@ public struct KImageLabel: View {
                      style: .horizontalButton
         )
         .frame(height: 50)
+        .padding(.top, -40)
         
     }
     
