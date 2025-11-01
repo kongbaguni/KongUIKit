@@ -16,12 +16,14 @@ public struct KSelectView: View {
         public let color: Color
     }
     
-    public init(items: [Item], selected: Binding<Item?> = .constant(nil)) {
+    public init(items: [Item], canCancel: Bool = false, selected: Binding<Item?> = .constant(nil)) {
         self.items = items
         self._selected = selected
+        self.canCancel = canCancel
     }
     
     let items: [Item]
+    let canCancel: Bool
     @Binding var selected: Item?
     
     func retangle(_ item:Item) -> some View {
@@ -38,6 +40,10 @@ public struct KSelectView: View {
             HStack {
                 ForEach(items, id: \.self) { item in
                     Button {
+                        if canCancel && selected == item {
+                            self.selected = nil
+                            return                            
+                        }
                         selected = item
                     } label: {
                         if #available(iOS 26.0, *) {
