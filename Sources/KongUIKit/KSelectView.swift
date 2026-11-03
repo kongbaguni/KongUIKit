@@ -33,14 +33,16 @@ public struct KSelectView: View {
     func retangle(_ item:Item) -> some View {
         Circle()
             .fill(item.color)
+            .opacity(selected == item ? 1.0 : 0.5)
             .background {
                 Circle()
                     .stroke(selected == item ? .primary : Color.clear, lineWidth: 3)
+                    
             }
     }
     
     var scrollView : some View {
-        ScrollView(.horizontal, showsIndicators: false) {
+        ScrollView(.horizontal, showsIndicators: true) {
             HStack {
                 ForEach(items, id: \.self) { item in
                     Button {
@@ -61,10 +63,10 @@ public struct KSelectView: View {
                             retangle(item)
                         }
                     }
-                    .padding(0)
+                    
                     .frame(width: 30, height: 40)
                 }
-            }
+            }.padding(.horizontal)
         }
     }
     public var body: some View {
