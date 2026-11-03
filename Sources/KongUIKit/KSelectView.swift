@@ -16,22 +16,26 @@ public struct KSelectView: View {
         public let color: Color
     }
     
-    public init(items: [Item], canCancel: Bool = false, selected: Binding<Item?> = .constant(nil)) {
+    public init(items: [Item], canCancel: Bool = false, selected: Binding<Item?> = .constant(nil),
+                itemSize : CGSize = .init(width: 50, height: 50)
+    ) {
         self.items = items
         self._selected = selected
         self.canCancel = canCancel
+        self.itemSize = itemSize
     }
     
+    let itemSize : CGSize
     let items: [Item]
     let canCancel: Bool
     @Binding var selected: Item?
     
     func retangle(_ item:Item) -> some View {
-        RoundedRectangle(cornerRadius: 25)
+        Circle()
             .fill(item.color)
             .background {
-                RoundedRectangle(cornerRadius: 25)
-                    .stroke(selected == item ? .primary : Color.clear, lineWidth: 7)
+                Circle()
+                    .stroke(selected == item ? .primary : Color.clear, lineWidth: 3)
             }
     }
     
@@ -46,23 +50,30 @@ public struct KSelectView: View {
                         }
                         selected = item
                     } label: {
-                        if #available(iOS 26.0, *) {
+                        if #available(iOS 26.0,macOS 26.0, *) {
                             retangle(item)
-                                .glassEffect(.clear.interactive(), in: .rect(cornerRadius: 25)
+                                .glassEffect(
+                                    .clear.interactive(),
+                                    in: .circle
                                 )
+                            
                         } else {
                             retangle(item)
                         }
                     }
-                    .padding(5)
-                    .frame(width: 50, height: 50)
+                    .padding(0)
+                    .frame(width: 30, height: 40)
                 }
             }
         }
     }
     public var body: some View {
-        if #available(iOS 26.0, *) {
-            scrollView.glassEffect(.clear.interactive(), in: .rect(cornerRadius: 10))
+        if #available(iOS 26.0,macOS 26.0, *) {
+            scrollView
+                .glassEffect(
+                    .clear.interactive(),
+                    in: .rect(cornerRadius: 10)
+                )         
         } else {
             scrollView
         }
@@ -85,5 +96,5 @@ public struct KSelectView: View {
             KSelectView.Item(id: 2, color: Color.red)
         ], selected: .constant(KSelectView.Item(id: 2, color: Color.red)))
 
-    }
+    }.frame(width:200)
 }

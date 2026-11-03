@@ -84,7 +84,7 @@ public struct KImageLabel: View {
         }
     }
     public var body: some View {
-        if #available(iOS 26.0, *) {
+        if #available(iOS 26.0,macOS 26.0, *) {
             label.glassEffect(.clear.interactive(),
                               in: .rect(cornerRadius: style.cornerRadius))
         } else {
